@@ -2,8 +2,10 @@
 
 // --- Types : à écrire ---
 
-// export type De =
+export type De = (faces: number) => number;
 
 // --- Constantes : décommenter, puis compléter ---
 
-// export const lancerDe: De =
+export const lancerDe: De = (faces) => {
+    return Math.floor(Math.random() * faces) + 1;
+};

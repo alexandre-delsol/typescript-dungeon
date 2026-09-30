@@ -1,16 +1,32 @@
 <!doctype html>
 <html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="data:," />
-    <title>Donjon</title>
-  </head>
-  <body class="min-h-screen bg-slate-900 text-slate-100">
-    <main id="jeu" class="mx-auto max-w-2xl space-y-4 p-4">
-      <h1 class="text-3xl font-bold">Donjon</h1>
-      <p id="message">Le jeu n'est pas encore branché.</p>
-    </main>
-    <script type="module" src="/src/main.ts"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="data:," />
+  <title>Donjon</title>
+</head>
+
+<body class="min-h-screen bg-slate-900 text-slate-100">
+  <main id="jeu" class="mx-auto max-w-2xl space-y-4 p-4">
+    <h1 class="text-3xl font-bold">Donjon</h1>
+    <article id="heros">
+      <h2 id="heros-nom"></h2>
+      <p id="heros-classe"></p>
+
+      <p>PV : <span id="heros-pv"></span></p>
+      <div class="w-full h-4 bg-gray-200">
+        <div id="heros-pv-barre" class="h-4"></div>
+      </div>
+
+      <p>Mana : <span id="heros-mana"></span></p>
+      <p>Attaque : <span id="heros-attaque"></span></p>
+      <p>Arme : <span id="heros-arme"></span></p>
+    </article>
+
+  </main>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+
 </html>

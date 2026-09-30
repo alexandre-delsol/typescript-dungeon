@@ -7,9 +7,9 @@ import "./style.css"
 // Imports : décommenter ceux du palier en cours (pas avant : les fonctions importées doivent exister).
 
 // Palier 2
-// import { couleurBarre, pourcentage } from "./affichage"
-// import { attaqueTotale, creerHeros } from "./heros"
-// import type { Heros } from "./heros"
+import { couleurBarre, pourcentage } from "./affichage"
+import { attaqueTotale, creerHeros } from "./heros"
+import type { Heros } from "./heros"
 
 // Palier 5
 // import { blesserHeros, blesserMonstre, calculerDegats, estVivant } from "./combat"
@@ -28,15 +28,30 @@ import "./style.css"
 // import type { Etape, Partie } from "./partie"
 // import { lireClasse, lireNom } from "./saisie"
 
-// Palier 0 : à supprimer au palier 2
-$("#message").text(`Le poste est prêt : jQuery ${$.fn.jquery} répond, Tailwind met en forme.`)
 
 // --- Palier 2 : la carte du héros ---
+let heros = creerHeros("Alex", "mage");
 
-// function afficherHeros(heros: Heros): void {
-//
-// }
+function afficherHeros(heros: Heros): void {
+    const pvPourcentage = pourcentage(heros.pv, heros.pvMax);
 
+    $("#heros-nom").text(heros.nom);
+    $("#heros-classe").text(heros.classe);
+
+    $("#heros-pv").text(`${heros.pv}/${heros.pvMax}`);
+    $("#heros-pv-barre")
+        .css("width", `${pvPourcentage}%`)
+        .addClass(couleurBarre(pvPourcentage));
+
+    $("#heros-mana").text(`${heros.mana}/${heros.manaMax}`);
+    $("#heros-attaque").text(heros.attaque);
+
+    $("#heros-arme").text(heros.arme?.nom ?? "Aucune");
+}
+heros = { ...creerHeros("Alex", "mage"), pv: 80 };
+heros = { ...creerHeros("Alex", "mage"), pv: 40 };
+heros = { ...creerHeros("Alex", "mage"), pv: 12 };
+afficherHeros(heros);
 // --- Palier 5 : premier combat (ces deux variables remplacent le héros du palier 2) ---
 
 // let heros = creerHeros("Aria", "mage")

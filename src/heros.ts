@@ -73,14 +73,14 @@ export function creerHeros(nom: string, classe: ClasseHeros): Heros {
     }
 }
 
-// export function attaqueTotale(heros: Heros): number {
-//
-// }
+export function attaqueTotale(heros: Heros): number {
+    return heros.attaque + (heros.arme?.bonus ?? 0);
+}
 
-// export function equiper(heros: Heros, arme: Arme): Heros {
-//
-// }
+export function equiper(heros: Heros, arme: Arme): Heros {
+    return { ...heros, arme };
+}
 
-// export function decrireHeros(heros: Heros): string {
-//
-// }
+export function decrireHeros(heros: Heros): string {
+    return `${heros.nom} ${heros.classe} ${heros.pv}/${heros.pvMax} ${heros.arme?.nom ?? ""}`
+}

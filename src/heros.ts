@@ -2,7 +2,7 @@
 // Palier 6 : ajouter le champ sac au type Heros
 
 // Palier 6 :
-// import type { Objet } from "./objets"
+import type { Objet } from "./objets"
 
 // --- Types : à écrire ---
 
@@ -24,6 +24,7 @@ export type Heros = {
     defense: number;
     or: number;
     arme?: Arme;
+    sac: readonly Objet[];
 }
 
 // --- Fonctions : décommenter, puis écrire le corps ---
@@ -45,6 +46,10 @@ export function creerHeros(nom: string, classe: ClasseHeros): Heros {
                     nom: "Épée courte",
                     bonus: 2
                 },
+                sac: [
+                    { type: "potion", soin: 30 },
+                    { type: "potion", soin: 30 }
+                ]
             }
         case "mage":
             return {
@@ -57,6 +62,10 @@ export function creerHeros(nom: string, classe: ClasseHeros): Heros {
                 attaque: 8,
                 defense: 3,
                 or: 0,
+                sac: [
+                    { type: "potion", soin: 30 },
+                    { type: "potion", soin: 30 }
+                ]
             }
         case "voleur":
             return {
@@ -69,6 +78,10 @@ export function creerHeros(nom: string, classe: ClasseHeros): Heros {
                 attaque: 14,
                 defense: 4,
                 or: 0,
+                sac: [
+                    { type: "potion", soin: 30 },
+                    { type: "potion", soin: 30 }
+                ]
             }
     }
 }

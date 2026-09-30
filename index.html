@@ -11,6 +11,7 @@
 <body class="min-h-screen bg-slate-900 text-slate-100">
   <main id="jeu" class="mx-auto max-w-2xl space-y-4 p-4">
     <h1 class="text-3xl font-bold">Donjon</h1>
+
     <article id="heros">
       <h2 id="heros-nom"></h2>
       <p id="heros-classe"></p>
@@ -25,6 +26,23 @@
       <p>Arme : <span id="heros-arme"></span></p>
     </article>
 
+    <article id="monstre">
+      <h2 id="monstre-nom"></h2>
+
+      <p>PV : <span id="monstre-pv"></span></p>
+
+      <div class="w-full h-4 bg-gray-200">
+        <div id="monstre-pv-barre" class="h-4"></div>
+      </div>
+
+      <p>Attaque : <span id="monstre-attaque"></span></p>
+      <p>Défense : <span id="monstre-defense"></span></p>
+    </article>
+
+    <button id="attaquer" type="button" class="cursor-pointer rounded bg-red-600 px-4 py-2 font-bold hover:bg-red-700">
+      Attaquer
+    </button>
+    <p id="annonce"></p>
   </main>
   <script type="module" src="/src/main.ts"></script>
 </body>

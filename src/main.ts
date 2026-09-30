@@ -12,10 +12,10 @@ import { attaqueTotale, creerHeros } from "./heros"
 import type { Heros } from "./heros"
 
 // Palier 5
-// import { blesserHeros, blesserMonstre, calculerDegats, estVivant } from "./combat"
-// import { lancerDe } from "./de"
-// import { monstreAuHasard } from "./monstres"
-// import type { Monstre } from "./monstres"
+import { blesserHeros, blesserMonstre, calculerDegats, estVivant } from "./combat"
+import { lancerDe } from "./de"
+import { monstreAuHasard } from "./monstres"
+import type { Monstre } from "./monstres"
 
 // Palier 9
 // import { jouerTour, lireAction } from "./actions"
@@ -48,26 +48,66 @@ function afficherHeros(heros: Heros): void {
 
     $("#heros-arme").text(heros.arme?.nom ?? "Aucune");
 }
-heros = { ...creerHeros("Alex", "mage"), pv: 80 };
-heros = { ...creerHeros("Alex", "mage"), pv: 40 };
-heros = { ...creerHeros("Alex", "mage"), pv: 12 };
-afficherHeros(heros);
+
+// heros = { ...creerHeros("Alex", "mage"), pv: 40 };
+// heros = { ...creerHeros("Alex", "mage"), pv: 1 };
+
+
 // --- Palier 5 : premier combat (ces deux variables remplacent le héros du palier 2) ---
 
-// let heros = creerHeros("Aria", "mage")
-// let monstre = monstreAuHasard(1, lancerDe)
 
-// function afficherMonstre(monstre: Monstre): void {
-//
-// }
+let monstre = monstreAuHasard(1, lancerDe)
 
-// function afficher(): void {
-//
-// }
+function afficherMonstre(monstre: Monstre): void {
 
-// $("#attaquer").on("click", () => {
-//
-// })
+    const pvPourcentage = pourcentage(monstre.pv, monstre.pvMax);
+
+    $("#monstre-nom").text(monstre.nom);
+
+    $("#monstre-pv").text(`${monstre.pv}/${monstre.pvMax}`);
+    $("#monstre-pv-barre")
+        .css("width", `${pvPourcentage}%`)
+        .addClass(couleurBarre(pvPourcentage));
+
+    $("#monstre-attaque").text(monstre.attaque);
+    $("#monstre-defense").text(monstre.defense);
+}
+
+function afficher(): void {
+    const combatFini = !estVivant(heros) || !estVivant(monstre);
+    afficherHeros(heros);
+    afficherMonstre(monstre);
+    if (combatFini) {
+        if (!estVivant(heros)) {
+            $("#annonce").text("Vous avez perdu")
+        } else if (!estVivant(monstre)) {
+            $("#annonce").text("Vous avez gagné")
+        }
+    }
+    $("#attaquer").prop("disabled", combatFini);
+}
+afficher();
+
+
+$("#attaquer").on("click", () => {
+
+    const degats = calculerDegats(
+        attaqueTotale(heros),
+        monstre.defense
+    );
+
+    if (estVivant(monstre)) monstre = blesserMonstre(monstre, degats);
+    if (estVivant(monstre)) {
+        const degatsMonstre = calculerDegats(
+            monstre.attaque,
+            heros.defense
+        );
+
+        heros = blesserHeros(heros, degatsMonstre);
+    }
+
+    afficher();
+})
 
 // --- Palier 9 : combat complet (remplace l'état et le clic du palier 5) ---
 

@@ -8,16 +8,21 @@ import type { Objet } from "./objets"
 
 export type ClasseHeros = "guerrier" | "mage" | "voleur"
 
-export type Arme = {
-    readonly nom: string;
-    readonly bonus: number;
+type ArmeBase = {
+    nom: string;
+    bonus: number;
 }
 
-export type Heros = {
-    readonly nom: string;
-    readonly classe: ClasseHeros;
-    readonly pvMax: number;
-    readonly manaMax: number;
+export type Arme = Readonly<ArmeBase>
+
+type HerosIdentite = {
+    nom: string;
+    classe: ClasseHeros;
+    pvMax: number;
+    manaMax: number;
+};
+
+type HerosEtat = {
     pv: number;
     mana: number;
     attaque: number;
@@ -25,7 +30,9 @@ export type Heros = {
     or: number;
     arme?: Arme;
     sac: readonly Objet[];
-}
+};
+
+export type Heros = Readonly<HerosIdentite> & HerosEtat;
 
 // --- Fonctions : décommenter, puis écrire le corps ---
 

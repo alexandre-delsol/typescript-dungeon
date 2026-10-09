@@ -9,14 +9,16 @@ export const NIVEAUX = [1, 2, 3] as const;
 
 export type Niveau = (typeof NIVEAUX)[number];
 
-export type ModeleMonstre = {
-    readonly nom: string;
-    readonly niveau: Niveau;
-    readonly pvMax: number;
-    readonly attaque: number;
-    readonly defense: number;
-    readonly butin: number;
+type ModeleMonstreBase = {
+    nom: string;
+    niveau: Niveau;
+    pvMax: number;
+    attaque: number;
+    defense: number;
+    butin: number;
 };
+
+export type ModeleMonstre = Readonly<ModeleMonstreBase>;
 
 export type Monstre = ModeleMonstre & {
     pv: number;

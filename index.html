@@ -25,6 +25,8 @@ flex items-center justify-center p-5">
       <p>Mana : <span id="heros-mana"></span></p>
       <p>Attaque : <span id="heros-attaque"></span></p>
       <p>Arme : <span id="heros-arme"></span></p>
+      <p>Potion : <span id="heros-potions"></span></p>
+      <ol id="journal"></ol>
     </article>
 
     <article id="monstre">
@@ -39,10 +41,31 @@ flex items-center justify-center p-5">
       <p>Attaque : <span id="monstre-attaque"></span></p>
       <p>Défense : <span id="monstre-defense"></span></p>
     </article>
+    <div id="actions">
 
-    <button id="attaquer" type="button" class="cursor-pointer rounded bg-red-600 px-4 py-2 font-bold hover:bg-red-700">
-      Attaquer
-    </button>
+      <button data-action="attaquer" type="button"
+        class="cursor-pointer rounded bg-red-600 px-4 py-2 font-bold hover:bg-red-700">
+        Attaquer
+      </button>
+      <button data-action="boule de feu" type="button"
+        class="cursor-pointer rounded bg-red-600 px-4 py-2 font-bold hover:bg-red-700">
+        Boule de feu
+      </button>
+      <button data-action="soin" type="button"
+        class="cursor-pointer rounded bg-red-600 px-4 py-2 font-bold hover:bg-red-700">
+        Soin
+      </button>
+      <button data-action="potion" type="button"
+        class="cursor-pointer rounded bg-red-600 px-4 py-2 font-bold hover:bg-red-700">
+        Potion
+      </button>
+      <button data-action="fuir" type="button"
+        class="cursor-pointer rounded bg-red-600 px-4 py-2 font-bold hover:bg-red-700">
+        Fuir
+      </button>
+
+      
+    </div>
     <p id="annonce"></p>
   </main>
   <script type="module" src="/src/main.ts"></script>

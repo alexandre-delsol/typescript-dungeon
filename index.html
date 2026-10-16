@@ -1,74 +1,231 @@
+
 <!doctype html>
 <html lang="fr">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" href="data:," />
-  <title>Donjon</title>
+  <meta name="theme-color" content="#0b1120" />
+  <title>Donjon — Les profondeurs</title>
 </head>
 
-<body class="min-h-screen bg-slate-950 text-slate-100 
-flex items-center justify-center p-5">
-  <main id="jeu" class="w-full max-w-2xl space-y-4 flex flex-col gap-2">
-    <h1 class="text-3xl font-bold">Donjon</h1>
+<body class="min-h-screen bg-slate-950 text-slate-100">
+  <main id="jeu" class="mx-auto flex min-h-screen w-full max-w-5xl flex-col gap-6 px-4 py-8 sm:px-6">
 
-    <article id="heros">
-      <h2 id="heros-nom"></h2>
-      <p id="heros-classe"></p>
+    <header class="text-center">
+      <p class="mb-2 text-xs font-bold uppercase tracking-[0.35em] text-amber-400">
+        Aventure • Combat • Survie
+      </p>
+      <h1 class="text-4xl font-black tracking-tight text-amber-100 sm:text-5xl">
+        DONJON
+      </h1>
+      <p class="mt-2 text-sm text-slate-400">
+        Oserez-vous découvrir ce qui se cache dans les profondeurs ?
+      </p>
+    </header>
 
-      <p>PV : <span id="heros-pv"></span></p>
-      <div class="w-full h-4 bg-gray-200">
-        <div id="heros-pv-barre" class="h-4"></div>
+    <!-- Accueil -->
+    <section id="ecran-accueil" class="panel mx-auto w-full max-w-xl rounded-2xl p-6 sm:p-8">
+      <div class="mb-6 text-center">
+        <span class="text-5xl" aria-hidden="true">⚔️</span>
+        <h2 class="mt-3 text-2xl font-bold text-amber-100">Crée ton héros</h2>
+        <p class="mt-2 text-sm text-slate-400">
+          Choisis ton nom et ta classe avant de franchir les portes.
+        </p>
       </div>
 
-      <p>Mana : <span id="heros-mana"></span></p>
-      <p>Attaque : <span id="heros-attaque"></span></p>
-      <p>Arme : <span id="heros-arme"></span></p>
-      <p>Potion : <span id="heros-potions"></span></p>
-      <ol id="journal"></ol>
-    </article>
+      <form id="formulaire" class="space-y-5">
+        <div class="space-y-2">
+          <label for="nom" class="block text-sm font-semibold text-slate-200">
+            Nom du héros
+          </label>
+          <input
+            id="nom"
+            name="nom"
+            type="text"
+            minlength="2"
+            maxlength="20"
+            autocomplete="off"
+            placeholder="Ex. : Aria"
+            required
+            class="field w-full rounded-xl px-4 py-3"
+          />
+          <p class="text-xs text-slate-500">Entre 2 et 20 caractères.</p>
+        </div>
 
-    <article id="monstre">
-      <h2 id="monstre-nom"></h2>
+        <div class="space-y-2">
+          <label for="classe" class="block text-sm font-semibold text-slate-200">
+            Classe
+          </label>
+          <select
+            name="classe"
+            id="classe"
+            class="field w-full rounded-xl px-4 py-3"
+          >
+            <option value="guerrier">⚔️ Guerrier — Force et résistance</option>
+            <option value="mage">✨ Mage — Magie et mana</option>
+            <option value="voleur">🗡️ Voleur — Agilité et ruse</option>
+          </select>
+        </div>
 
-      <p>PV : <span id="monstre-pv"></span></p>
+        <p id="erreur" role="alert" class="text-sm font-medium text-rose-400"></p>
 
-      <div class="w-full h-4 bg-gray-200">
-        <div id="monstre-pv-barre" class="h-4"></div>
+        <button type="submit" class="btn btn-gold w-full">
+          Commencer l'aventure <span aria-hidden="true">→</span>
+        </button>
+      </form>
+    </section>
+
+    <!-- Partie -->
+    <section id="ecran-partie" class="hidden space-y-5">
+      <div class="panel flex flex-wrap items-center justify-between gap-3 rounded-xl px-5 py-4">
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest text-slate-500">Progression</p>
+          <p id="progression" class="mt-1 font-semibold text-amber-100">Prêt à partir</p>
+        </div>
+        <span class="rounded-full border border-amber-400/20 bg-amber-400/10 px-3 py-1 text-xs font-bold text-amber-300">
+          EXPLORATION
+        </span>
       </div>
 
-      <p>Attaque : <span id="monstre-attaque"></span></p>
-      <p>Défense : <span id="monstre-defense"></span></p>
-    </article>
-    <div id="actions">
+      <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
+        <!-- Carte héros -->
+        <article id="heros" class="character-card panel rounded-2xl p-5 sm:p-6">
+          <div class="mb-5 flex items-center gap-4">
+            <div class="avatar avatar-hero" aria-hidden="true">🛡️</div>
+            <div class="min-w-0">
+              <p class="text-xs font-bold uppercase tracking-widest text-emerald-400">Ton héros</p>
+              <h2 id="heros-nom" class="truncate text-xl font-bold text-slate-100"></h2>
+              <p id="heros-classe" class="mt-1 text-sm capitalize text-slate-400"></p>
+            </div>
+          </div>
 
-      <button data-action="attaquer" type="button"
-        class="cursor-pointer rounded bg-red-600 px-4 py-2 font-bold hover:bg-red-700">
-        Attaquer
-      </button>
-      <button data-action="boule de feu" type="button"
-        class="cursor-pointer rounded bg-red-600 px-4 py-2 font-bold hover:bg-red-700">
-        Boule de feu
-      </button>
-      <button data-action="soin" type="button"
-        class="cursor-pointer rounded bg-red-600 px-4 py-2 font-bold hover:bg-red-700">
-        Soin
-      </button>
-      <button data-action="potion" type="button"
-        class="cursor-pointer rounded bg-red-600 px-4 py-2 font-bold hover:bg-red-700">
-        Potion
-      </button>
-      <button data-action="fuir" type="button"
-        class="cursor-pointer rounded bg-red-600 px-4 py-2 font-bold hover:bg-red-700">
-        Fuir
-      </button>
+          <div class="space-y-4">
+            <div>
+              <div class="mb-2 flex justify-between text-sm">
+                <span class="font-semibold text-rose-300">❤ Points de vie</span>
+                <span id="heros-pv" class="font-bold tabular-nums"></span>
+              </div>
+              <div class="health-track">
+                <div id="heros-pv-barre" class="health-fill"></div>
+              </div>
+            </div>
 
-      
-    </div>
-    <p id="annonce"></p>
+            <div>
+              <div class="mb-2 flex justify-between text-sm">
+                <span class="font-semibold text-sky-300">✦ Mana</span>
+                <span id="heros-mana" class="font-bold tabular-nums"></span>
+              </div>
+              <div class="health-track">
+                <div id="heros-mana-barre" class="health-fill mana-fill"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-5 grid grid-cols-2 gap-3">
+            <div class="stat-box">
+              <p class="stat-label">Attaque</p>
+              <p id="heros-attaque" class="stat-value"></p>
+            </div>
+            <div class="stat-box">
+              <p class="stat-label">Arme</p>
+              <p id="heros-arme" class="stat-value truncate"></p>
+            </div>
+            <div class="stat-box col-span-2">
+              <p class="stat-label">Potions dans le sac</p>
+              <p id="heros-potions" class="stat-value"></p>
+            </div>
+          </div>
+        </article>
+
+        <!-- Carte monstre -->
+        <article id="monstre" class="character-card panel rounded-2xl p-5 sm:p-6">
+          <div class="mb-5 flex items-center gap-4">
+            <div class="avatar avatar-monster" aria-hidden="true">👹</div>
+            <div class="min-w-0">
+              <p class="text-xs font-bold uppercase tracking-widest text-rose-400">Ennemi</p>
+              <h2 id="monstre-nom" class="truncate text-xl font-bold text-slate-100"></h2>
+              <p class="mt-1 text-sm text-slate-400">Adversaire du donjon</p>
+            </div>
+          </div>
+
+          <div>
+            <div class="mb-2 flex justify-between text-sm">
+              <span class="font-semibold text-rose-300">❤ Points de vie</span>
+              <span id="monstre-pv" class="font-bold tabular-nums"></span>
+            </div>
+            <div class="health-track">
+              <div id="monstre-pv-barre" class="health-fill monster-fill"></div>
+            </div>
+          </div>
+
+          <div class="mt-5 grid grid-cols-2 gap-3">
+            <div class="stat-box">
+              <p class="stat-label">Attaque</p>
+              <p id="monstre-attaque" class="stat-value"></p>
+            </div>
+            <div class="stat-box">
+              <p class="stat-label">Défense</p>
+              <p id="monstre-defense" class="stat-value"></p>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- Actions -->
+      <section class="panel rounded-2xl p-5 sm:p-6">
+        <h2 class="mb-4 text-lg font-bold text-amber-100">Que veux-tu faire ?</h2>
+
+        <div id="actions" class="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+          <button data-action="attaquer" type="button" class="btn btn-danger">
+            ⚔️ Attaquer
+          </button>
+          <button data-action="boule de feu" type="button" class="btn btn-magic">
+            🔥 Boule de feu
+          </button>
+          <button data-action="soin" type="button" class="btn btn-heal">
+            ✨ Soin
+          </button>
+          <button data-action="potion" type="button" class="btn btn-potion">
+            🧪 Potion
+          </button>
+          <button data-action="fuir" type="button" class="btn btn-neutral">
+            ↩ Fuir
+          </button>
+        </div>
+
+        <button id="avancer" type="button" class="btn btn-gold w-full mt-2">
+          Ouvrir la porte suivante <span aria-hidden="true">→</span>
+        </button>
+
+        <p id="annonce" class="hidden"></p>
+      </section>
+
+      <!-- Journal -->
+      <section class="panel rounded-2xl p-5 sm:p-6">
+        <div class="mb-4 flex items-center justify-between">
+          <h2 class="text-lg font-bold text-amber-100">📜 Journal d'aventure</h2>
+          <span class="text-xs text-slate-500">Derniers événements</span>
+        </div>
+        <ol id="journal" class="space-y-2 text-sm leading-relaxed text-slate-300"></ol>
+      </section>
+    </section>
+
+    <!-- Fin -->
+    <section id="ecran-fin" class="panel hidden mx-auto w-full max-w-xl rounded-2xl p-8 text-center">
+      <div class="mb-4 text-6xl" aria-hidden="true">🏆</div>
+      <h2 id="titre-fin" class="text-3xl font-black text-amber-100">Fin de l'aventure</h2>
+      <p id="resultat" class="my-5 leading-relaxed text-slate-300"></p>
+      <button id="rejouer" type="button" class="btn btn-gold w-full">
+        ↻ Recommencer une aventure
+      </button>
+    </section>
+
+    <footer class="pt-2 text-center text-xs text-slate-600">
+      Que la chance accompagne tes pas dans les profondeurs.
+    </footer>
   </main>
+
   <script type="module" src="/src/main.ts"></script>
 </body>
-
 </html>

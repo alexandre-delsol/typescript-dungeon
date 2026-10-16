@@ -1,1 +1,291 @@
 @import "tailwindcss";
+
+@import "tailwindcss";
+
+/* Palette et fond général */
+
+:root {
+  color-scheme: dark;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background:
+    radial-gradient(ellipse at 50% 0%, rgb(120 53 15 / 18%), transparent 45%),
+    #0b1120;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Panneaux */
+
+.panel {
+  border: 1px solid rgb(148 163 184 / 15%);
+  background: linear-gradient(145deg, rgb(30 41 59 / 95%), rgb(15 23 42 / 98%));
+  box-shadow:
+    0 18px 45px rgb(0 0 0 / 20%),
+    inset 0 1px 0 rgb(255 255 255 / 3%);
+}
+
+.character-card {
+  position: relative;
+  overflow: hidden;
+  transition: border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.character-card::before {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #d6a84f, transparent);
+  content: "";
+  opacity: 0.8;
+}
+
+#heros {
+  border-color: rgb(52 211 153 / 18%);
+}
+
+#monstre {
+  border-color: rgb(251 113 133 / 20%);
+}
+
+.avatar {
+  display: grid;
+  width: 3.5rem;
+  height: 3.5rem;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid rgb(255 255 255 / 10%);
+  border-radius: 1rem;
+  font-size: 1.8rem;
+}
+
+.avatar-hero {
+  background: rgb(16 185 129 / 12%);
+}
+
+.avatar-monster {
+  background: rgb(244 63 94 / 12%);
+}
+
+/* Champs du formulaire */
+
+.field {
+  border: 1px solid rgb(148 163 184 / 25%);
+  background-color: #0f172a;
+  color: #f8fafc;
+  outline: none;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.field::placeholder {
+  color: #64748b;
+}
+
+.field:focus {
+  border-color: #fbbf24;
+  box-shadow: 0 0 0 3px rgb(251 191 36 / 15%);
+}
+
+select.field {
+  color-scheme: dark;
+  cursor: pointer;
+}
+
+select.field option {
+  background-color: #0f172a;
+  color: #f8fafc;
+}
+
+/* Boutons */
+
+.btn {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 1px solid transparent;
+  border-radius: 0.75rem;
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 750;
+  line-height: 1.25;
+  text-align: center;
+  cursor: pointer;
+  transition:
+    transform 150ms ease,
+    filter 150ms ease,
+    background-color 150ms ease,
+    box-shadow 150ms ease;
+}
+
+.btn.hidden {
+  display: none;
+}
+
+.btn:hover {
+  filter: brightness(1.12);
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.btn:focus-visible {
+  outline: 2px solid #fbbf24;
+  outline-offset: 3px;
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  filter: grayscale(0.7);
+  opacity: 0.5;
+  transform: none;
+}
+
+.btn-gold {
+  border-color: rgb(251 191 36 / 40%);
+  background: linear-gradient(135deg, #fbbf24, #d97706);
+  color: #1c1917;
+  box-shadow: 0 5px 18px rgb(217 119 6 / 15%);
+}
+
+.btn-danger {
+  border-color: rgb(251 113 133 / 30%);
+  background: rgb(190 24 93 / 16%);
+  color: #fda4af;
+}
+
+.btn-magic {
+  border-color: rgb(167 139 250 / 30%);
+  background: rgb(124 58 237 / 18%);
+  color: #c4b5fd;
+}
+
+.btn-heal {
+  border-color: rgb(52 211 153 / 30%);
+  background: rgb(5 150 105 / 16%);
+  color: #6ee7b7;
+}
+
+.btn-potion {
+  border-color: rgb(251 191 36 / 30%);
+  background: rgb(180 83 9 / 16%);
+  color: #fcd34d;
+}
+
+.btn-neutral {
+  border-color: rgb(148 163 184 / 25%);
+  background: rgb(71 85 105 / 25%);
+  color: #cbd5e1;
+}
+
+/* Statistiques */
+
+.stat-box {
+  min-width: 0;
+  border: 1px solid rgb(148 163 184 / 12%);
+  border-radius: 0.75rem;
+  background: rgb(2 6 23 / 28%);
+  padding: 0.75rem;
+}
+
+.stat-label {
+  margin-bottom: 0.25rem;
+  color: #94a3b8;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.stat-value {
+  color: #f1f5f9;
+  font-size: 1rem;
+  font-weight: 750;
+}
+
+/* Barres de vie et de mana */
+
+.health-track {
+  height: 0.65rem;
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 6%);
+  border-radius: 999px;
+  background: #020617;
+}
+
+.health-fill {
+  width: 0%;
+  height: 100%;
+  border-radius: inherit;
+  transition: width 300ms ease;
+}
+
+.mana-fill {
+  background: linear-gradient(90deg, #2563eb, #67e8f9);
+}
+
+/* Journal */
+
+#journal li {
+  border-left: 2px solid rgb(251 191 36 / 40%);
+  border-radius: 0 0.4rem 0.4rem 0;
+  background: rgb(2 6 23 / 25%);
+  padding: 0.65rem 0.8rem;
+}
+
+#journal:empty::after {
+  display: block;
+  color: #64748b;
+  content: "Aucun événement pour le moment…";
+  font-style: italic;
+}
+
+/* Animation de dégâts */
+
+.shake {
+  animation: damage-shake 420ms ease-in-out;
+}
+
+#heros.shake {
+  border-color: rgb(251 113 133 / 80%);
+  box-shadow: 0 0 25px rgb(244 63 94 / 18%);
+}
+
+#monstre.shake {
+  border-color: rgb(251 113 133 / 90%);
+  box-shadow: 0 0 25px rgb(244 63 94 / 22%);
+}
+
+@keyframes damage-shake {
+  0%, 100% { transform: translateX(0); }
+  15%, 45%, 75% { transform: translateX(-5px); }
+  30%, 60%, 90% { transform: translateX(5px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
